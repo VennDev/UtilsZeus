@@ -1,331 +1,375 @@
 #include "location.h"
 #include "zmath.h"
 
-#include <math.h>
+#include <cmath>
 #include <algorithm>
 #include <iostream>
 
-namespace Utils
+namespace utils
 {
 
-	Location::Location()
-		: _x(0.0), _y(0.0), _z(0.0), _yaw(0.0), _pitch(0.0), _onGround(false)
+	location::location()
+		: x_(0.0), y_(0.0), z_(0.0), yaw_(0.0), pitch_(0.0), on_ground_(false)
 	{
 
 	}
 
-	double Location::getX()
+	double location::get_x() const
 	{
-		return _x;
+		return x_;
 	}
 
-	double Location::getY()
+	double location::get_y() const
 	{
-		return _y;
+		return y_;
 	}
 
-	double Location::getZ()
+	double location::get_z() const
 	{
-		return _z;
+		return z_;
 	}
 
-	double Location::getYaw()
+	void location::set_x(const double x)
 	{
-		return _yaw;
+		x_ = x;
 	}
 
-	double Location::getPitch()
+	void location::set_y(const double y)
 	{
-		return _pitch;
+		y_ = y;
 	}
 
-	bool Location::isOnGround()
+	void location::set_z(const double z)
 	{
-		return _onGround;
+		z_ = z;
 	}
 
-	void Location::add(double x, double y, double z, double yaw, double pitch)
+	double location::get_yaw() const
 	{
-		_x += x;
-		_y += y;
-		_z += z;
-		_yaw += yaw;
-		_pitch += pitch;
+		return yaw_;
 	}
 
-	void Location::subtract(double x, double y, double z, double yaw, double pitch)
+	double location::get_pitch() const
 	{
-		_x += x;
-		_y += y;
-		_z += z;
-		_yaw += yaw;
-		_pitch += pitch;
+		return pitch_;
 	}
 
-	bool Location::equals(Location* location)
+	bool location::is_on_ground() const
 	{
-		return _x == location->getX() && _y == location->getY() && _z == location->getZ() && _yaw == location->getYaw() && _pitch == location->getPitch() && _onGround == location->isOnGround();
+		return on_ground_;
 	}
 
-	std::string Location::toString()
+	void location::set_yaw(const double yaw)
+	{
+		yaw_ = yaw;
+	}
+
+	void location::set_pitch(const double pitch)
+	{
+		pitch_ = pitch;
+	}
+
+	void location::set_on_ground(const bool on_ground)
+	{
+		on_ground_ = on_ground;
+	}
+
+	void location::add(const double x, const double y, const double z, const double yaw, const double pitch)
+	{
+		x_ += x;
+		y_ += y;
+		z_ += z;
+		yaw_ += yaw;
+		pitch_ += pitch;
+	}
+
+	void location::subtract(const double x, const double y, const double z, const double yaw, const double pitch)
+	{
+		x_ += x;
+		y_ += y;
+		z_ += z;
+		yaw_ += yaw;
+		pitch_ += pitch;
+	}
+
+	bool location::equals(const location* location) const
+	{
+		return x_ == location->get_x() && y_ == location->get_y() && z_ == location->get_z() && yaw_ == location->get_yaw() && pitch_ == location->get_pitch() && on_ground_ == location->is_on_ground();
+	}
+
+	std::string location::to_string() const
 	{
 		std::string string = "Location(";
-		string += "x=" + std::to_string(_x) + ", ";
-		string += "y=" + std::to_string(_y) + ", ";
-		string += "z=" + std::to_string(_z) + ", ";
-		string += "yaw=" + std::to_string(_yaw) + ", ";
-		string += "pitch=" + std::to_string(_pitch) + ", ";
-		string += "onGround=" + std::to_string(_onGround) + ")";
+		string += "x=" + std::to_string(x_) + ", ";
+		string += "y=" + std::to_string(y_) + ", ";
+		string += "z=" + std::to_string(z_) + ", ";
+		string += "yaw=" + std::to_string(yaw_) + ", ";
+		string += "pitch=" + std::to_string(pitch_) + ", ";
+		string += "onGround=" + std::to_string(on_ground_) + ")";
+
 		return string;
 	}
 
-	Vector3::Vector3(double x, double y, double z)
-		: _x(x), _y(y), _z(z)
+	vector3::vector3(const double x, const double y, const double z)
+		: x_(x), y_(y), z_(z)
 	{
 
 	}
 
-	double Vector3::getX()
+	double vector3::get_x() const
 	{
-		return _x;
+		return x_;
 	}
 
-	double Vector3::getY()
+	double vector3::get_y() const
 	{
-		return _y;
+		return y_;
 	}
 
-	double Vector3::getZ()
+	double vector3::get_z() const
 	{
-		return _z;
+		return z_;
 	}
 
-	void Vector3::setX(double x)
+	void vector3::set_x(const double x)
 	{
-		_x = x;
+		x_ = x;
 	}
 
-	void Vector3::setY(double y)
+	void vector3::set_y(const double y)
 	{
-		_y = y;
+		y_ = y;
 	}
 
-	void Vector3::setZ(double z)
+	void vector3::set_z(const double z)
 	{
-		_z = z;
+		z_ = z;
 	}
 
-	void Vector3::add(double x, double y, double z)
+	void vector3::add(const double x, const double y, const double z)
 	{
-		_x += x;
-		_y += y;
-		_z += z;
+		x_ += x;
+		y_ += y;
+		z_ += z;
 	}
 
-	void Vector3::subtract(double x, double y, double z)
+	void vector3::subtract(const double x, const double y, const double z)
 	{
-		_x -= x;
-		_y -= y;
-		_z -= z;
+		x_ -= x;
+		y_ -= y;
+		z_ -= z;
 	}
 
-	void Vector3::multiply(double x, double y, double z)
+	void vector3::multiply(const double x, const double y, const double z)
 	{
-		_x *= x;
-		_y *= y;
-		_z *= z;
+		x_ *= x;
+		y_ *= y;
+		z_ *= z;
 	}
 
-	void Vector3::divide(double x, double y, double z)
+	void vector3::divide(const double x, const double y, const double z)
 	{
-		_x /= x;
-		_y /= y;
-		_z /= z;
+		x_ /= x;
+		y_ /= y;
+		z_ /= z;
 	}
 
-	void Vector3::floorX()
+	void vector3::floor_x()
 	{
-		_x = floor(_x);
+		x_ = floor(x_);
 	}
 
-	void Vector3::floorY()
+	void vector3::floor_y()
 	{
-		_y = floor(_y);
+		y_ = floor(y_);
 	}
 
-	void Vector3::floorZ()
+	void vector3::floor_z()
 	{
-		_z = floor(_z);
+		z_ = floor(z_);
 	}
 
-	Vector3 Vector3::toCeil()
+	vector3 vector3::to_ceil() const
 	{
-		Vector3 result;
-		result._x = ceil(_x);
-		result._y = ceil(_y);
-		result._z = ceil(_z);
+		vector3 result;
+		result.x_ = ceil(x_);
+		result.y_ = ceil(y_);
+		result.z_ = ceil(z_);
 		return result;
 	}
 
-	Vector3 Vector3::toFloor()
+	vector3 vector3::to_floor() const
 	{
-		Vector3 result;
-		result._x = floor(_x);
-		result._y = floor(_y);
-		result._z = floor(_z);
+		vector3 result;
+
+		result.x_ = floor(x_);
+		result.y_ = floor(y_);
+		result.z_ = floor(z_);
+
 		return result;
 	}
 
-	Vector3 Vector3::toRound(int precision, int mode)
+	vector3 vector3::to_round(const int precision, int mode) const
 	{
-		Vector3 vector1;
-		Vector3 vector2;
+		vector3 vector1;
+		vector3 vector2;
 
-		vector1._x = round(_x * pow(10, precision)) / pow(10, precision);
-		vector1._y = round(_y * pow(10, precision)) / pow(10, precision);
-		vector1._z = round(_z * pow(10, precision)) / pow(10, precision);
+		vector1.x_ = round(x_ * pow(10, precision)) / pow(10, precision);
+		vector1.y_ = round(y_ * pow(10, precision)) / pow(10, precision);
+		vector1.z_ = round(z_ * pow(10, precision)) / pow(10, precision);
 
-		vector2._x = static_cast<int>(round(_x * pow(10, precision)) / pow(10, precision));
-		vector2._y = static_cast<int>(round(_y * pow(10, precision)) / pow(10, precision));
-		vector2._z = static_cast<int>(round(_z * pow(10, precision)) / pow(10, precision));
+		vector2.x_ = static_cast<int>(round(x_ * pow(10, precision)) / pow(10, precision));
+		vector2.y_ = static_cast<int>(round(y_ * pow(10, precision)) / pow(10, precision));
+		vector2.z_ = static_cast<int>(round(z_ * pow(10, precision)) / pow(10, precision));
 
 		return precision > 0 ? vector1 : vector2;
 	}
 
-	Vector3 Vector3::toAbs()
+	vector3 vector3::to_abs() const
 	{
-		Vector3 result;
-		result._x = abs(_x);
-		result._y = abs(_y);
-		result._z = abs(_z);
+		vector3 result;
+		result.x_ = abs(x_);
+		result.y_ = abs(y_);
+		result.z_ = abs(z_);
 		return result;
 	}
 
-	Vector3 Vector3::toNormalize()
+	vector3 vector3::to_normalize() const
 	{
-		Vector3 result(0.0, 0.0, 0.0);
-		double len = Vector3::getLengthSquared();
+		vector3 result(0.0, 0.0, 0.0);
+		const double len = get_length_squared();
+
 		if (len > 0) {
 			result.divide(sqrt(len), sqrt(len), sqrt(len));
 			return result;
 		}
+
 		return result;
 	}
 
-	Vector3 Vector3::toCross(Vector3& vector3)
+	vector3 vector3::to_cross(const vector3& vc) const
 	{
-		Vector3 result(0.0, 0.0, 0.0);
-		result._x = _y * vector3.getZ() - _z * vector3.getY();
-		result._y = _z * vector3.getX() - _x * vector3.getZ();
-		result._z = _x * vector3.getY() - _y * vector3.getX();
+		vector3 result;
+
+		result.x_ = y_ * vc.get_z() - z_ * vc.get_y();
+		result.y_ = z_ * vc.get_x() - x_ * vc.get_z();
+		result.z_ = x_ * vc.get_y() - y_ * vc.get_x();
+
 		return result;
 	}
 
-	Vector3* Vector3::getIntermediateWithXValue(Vector3& vector3, float x)
+	vector3* vector3::get_intermediate_with_x_value(const vector3& vc, const float x) const
 	{
-		double diff = vector3.getX() - _x;
-		if ((diff * diff) < 0.0000001)
-		{
+		const double diff = vc.get_x() - x_;
+
+		if ((diff * diff) < 0.0000001) {
 			return nullptr;
 		}
-		double f = (x - _x) / diff;
-		if (f < 0 || f > 1)
-		{
+
+		const double f = (x - x_) / diff;
+		if (f < 0 || f > 1) {
 			return nullptr;
 		}
-		Vector3* result = new Vector3();
-		result->_x = x;
-		result->_y = _y + (vector3._y - _y) * f;
-		result->_z = _z + (vector3._z - _z) * f;
+
+		auto* result = new vector3();
+		result->x_ = x;
+		result->y_ = y_ + (vc.y_ - y_) * f;
+		result->z_ = z_ + (vc.z_ - z_) * f;
+
 		return result;
 	}
 
-	Vector3* Vector3::getIntermediateWithYValue(Vector3& vector3, float y)
+	vector3* vector3::get_intermediate_with_y_value(const vector3& vc, const float y) const
 	{
-		double diff = vector3.getY() - _y;
-		if ((diff * diff) < 0.0000001)
-		{
+		const double diff = vc.get_y() - y_;
+
+		if ((diff * diff) < 0.0000001) {
 			return nullptr;
 		}
-		double f = (y - _y) / diff;
-		if (f < 0 || f > 1)
-		{
+
+		const double f = (y - y_) / diff;
+		if (f < 0 || f > 1) {
 			return nullptr;
 		}
-		Vector3* result = new Vector3();
-		result->_x = _x + (vector3._x - _x) * f;
-		result->_y = y;
-		result->_z = _z + (vector3._z - _z) * f;
+
+		auto* result = new vector3();
+		result->x_ = x_ + (vc.x_ - x_) * f;
+		result->y_ = y;
+		result->z_ = z_ + (vc.z_ - z_) * f;
+
 		return result;
 	}
 
-	Vector3* Vector3::getIntermediateWithZValue(Vector3& vector3, float z)
+	vector3* vector3::get_intermediate_with_z_value(const vector3& vc, const float z) const
 	{
-		double diff = vector3.getZ() - _z;
-		if ((diff * diff) < 0.0000001)
-		{
+		const double diff = vc.get_z() - z_;
+
+		if ((diff * diff) < 0.0000001) {
 			return nullptr;
 		}
-		double f = (z - _z) / diff;
-		if (f < 0 || f > 1)
-		{
+
+		const double f = (z - z_) / diff;
+		if (f < 0 || f > 1) {
 			return nullptr;
 		}
-		Vector3* result = new Vector3();
-		result->_x = _x + (vector3._x - _x) * f;
-		result->_y = _y + (vector3._y - _y) * f;
-		result->_z = z;
+
+		auto* result = new vector3();
+		result->x_ = x_ + (vc.x_ - x_) * f;
+		result->y_ = y_ + (vc.y_ - y_) * f;
+		result->z_ = z;
+
 		return result;
 	}
 
-	Vector3 Vector3::getDirectionVector(double pitch, double yaw)
+	vector3 vector3::get_direction_vector(double pitch, double yaw)
 	{
-		double y = -sin(ZMath::deg2rad(pitch));
-		double xz = cos(ZMath::deg2rad(pitch));
-		double x = -xz * sin(ZMath::deg2rad(yaw));
-		double z = xz * cos(ZMath::deg2rad(yaw));
-		Vector3 result(x, y, z);
-		return result.toNormalize();
+		const double y = -sin(z_math::deg2_rad(pitch));
+		const double xz = cos(z_math::deg2_rad(pitch));
+		const double x = -xz * sin(z_math::deg2_rad(yaw));
+		const double z = xz * cos(z_math::deg2_rad(yaw));
+
+		const vector3 result(x, y, z);
+		return result.to_normalize();
 	}
 
-	double Vector3::distance(Vector3& vector3)
+	double vector3::distance(const vector3& vector3) const
 	{
-		return sqrt(distanceSquared(vector3));
+		return sqrt(distance_squared(vector3));
 	}
 
-	double Vector3::distanceSquared(Vector3& vector3)
+	double vector3::distance_squared(const vector3& vector3) const
 	{
-		return pow((_x - vector3.getX()), 2) + pow((_y - vector3.getY()), 2) + pow((_z - vector3.getZ()), 2);
+		return pow((x_ - vector3.get_x()), 2) + pow((y_ - vector3.get_y()), 2) + pow((z_ - vector3.get_z()), 2);
 	}
 
-	double Vector3::maxPlainDistance(double x, double z)
+	double vector3::max_plain_distance(const double x, const double z) const
 	{
-		return std::max(abs(_x - x), abs(_z - z));
+		return std::max(abs(x_ - x), abs(z_ - z));
 	}
 
-	double Vector3::getLength()
+	double vector3::get_length() const
 	{
-		return sqrt(getLengthSquared());
+		return sqrt(get_length_squared());
 	}
 
-	double Vector3::getLengthSquared()
+	double vector3::get_length_squared() const
 	{
-		return _x * _x + _y * _y + _z * _z;
+		return x_ * x_ + y_ * y_ + z_ * z_;
 	}
 
-	double Vector3::toHypot(double p1, double p2)
+	double vector3::to_hypot(const double p1, const double p2)
 	{
 		return sqrt(p1 * p1 + p2 * p2);
 	}
 
-	double Vector3::toDot(Vector3& vector3)
+	double vector3::to_dot(const vector3& vector3) const
 	{
-		return _x * vector3.getX() + _y * vector3.getY() + _z * vector3.getZ();
+		return x_ * vector3.get_x() + y_ * vector3.get_y() + z_ * vector3.get_z();
 	}
 
-	bool Vector3::equals(Vector3& vector3)
+	bool vector3::equals(const vector3& vector3) const
 	{
-		return _x == vector3.getX() && _y == vector3.getY() && _z == vector3.getZ();
+		return x_ == vector3.get_x() && y_ == vector3.get_y() && z_ == vector3.get_z();
 	}
 
 }

@@ -5,12 +5,12 @@
 
 #include <iostream>
 
-namespace Utils
+namespace utils
 {
-	class ZString
+	class z_string
 	{
 	public:
-		std::string str_replace(const std::string& str, const std::string& search, const std::string& replace);
+		static std::string str_replace(const std::string& str, const std::string& search, const std::string& replace);
 	};
 }
 

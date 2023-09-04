@@ -3,12 +3,14 @@
 #ifndef Z_MATH_H
 #define Z_MATH_H
 
-namespace Utils
+namespace utils
 {
-	class ZMath
+	class z_math
 	{
 	public:
-		static double deg2rad(double& degrees);
+		static double deg2_rad(const double& degrees);
+
+		static bool can_double_to_short(double number);
 	};
 }
 

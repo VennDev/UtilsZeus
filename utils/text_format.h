@@ -5,34 +5,34 @@
 
 #include <string>
 
-namespace Utils
+namespace utils
 {
-	class TextFormat
+	class text_format
 	{
 	public:
-		static const std::string ESCAPE;
-		static const std::string EOL;
-		static const std::string RESET;
-		static const std::string RED;
-		static const std::string GREEN;
-		static const std::string YELLOW;
-		static const std::string BLUE;
-		static const std::string BLACK;
-		static const std::string MAGENTA;
-		static const std::string CYAN;
-		static const std::string WHITE;
-		static const std::string GOLD;
-		static const std::string GRAY;
-		static const std::string BOLD_RED;
-		static const std::string BOLD_GREEN;
-		static const std::string BOLD_YELLOW;
-		static const std::string BOLD_BLUE;
-		static const std::string BOLD_MAGENTA;
-		static const std::string BOLD_CYAN;
-		static const std::string BOLD_WHITE;
-		static const std::string BOLD_GOLD;
+		static const std::string escape;
+		static const std::string eol;
+		static const std::string reset;
+		static const std::string red;
+		static const std::string green;
+		static const std::string yellow;
+		static const std::string blue;
+		static const std::string black;
+		static const std::string magenta;
+		static const std::string cyan;
+		static const std::string white;
+		static const std::string gold;
+		static const std::string gray;
+		static const std::string bold_red;
+		static const std::string bold_green;
+		static const std::string bold_yellow;
+		static const std::string bold_blue;
+		static const std::string bold_magenta;
+		static const std::string bold_cyan;
+		static const std::string bold_white;
+		static const std::string bold_gold;
 
-		std::string colorize(std::string text);
+		static std::string colorize(std::string text);
 	};
 }
 

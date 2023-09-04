@@ -10,31 +10,31 @@
 
 #include <string>
 
-namespace Utils
+namespace utils
 {
-	class Vector3
+	class vector3
 	{
-	private:
-		double _x;
-		double _y;
-		double _z;
-
+		double x_;
+		double y_;
+		double z_;
+		
 	public:
-		Vector3(double x, double y, double z);
+		
+		vector3(double x, double y, double z);
 
-		Vector3() = default;
+		vector3() = default;
 
-		double getX();
+		double get_x() const;
 
-		double getY();
+		double get_y() const;
 
-		double getZ();
+		double get_z() const;
 
-		void setX(double x);
+		void set_x(double x);
 
-		void setY(double y);
+		void set_y(double y);
 
-		void setZ(double z);
+		void set_z(double z);
 
 		void add(double x, double y, double z);
 
@@ -44,81 +44,92 @@ namespace Utils
 
 		void divide(double x, double y, double z);
 
-		void floorX();
+		void floor_x();
 
-		void floorY();
+		void floor_y();
 
-		void floorZ();
+		void floor_z();
 
-		Vector3 toCeil();
+		vector3 to_ceil() const;
 
-		Vector3 toFloor();
+		vector3 to_floor() const;
 
-		Vector3 toRound(int precision, int mode);
+		vector3 to_round(int precision, int mode) const;
 
-		Vector3 toAbs();
+		vector3 to_abs() const;
 
-		Vector3 toNormalize();
+		vector3 to_normalize() const;
 
-		Vector3 toCross(Vector3& vector3);
+		vector3 to_cross(const vector3& vector3) const;
 
-		Vector3* getIntermediateWithXValue(Vector3& vector3, float x);
+		vector3* get_intermediate_with_x_value(const vector3& vector3, float x) const;
 
-		Vector3* getIntermediateWithYValue(Vector3& vector3, float y);
+		vector3* get_intermediate_with_y_value(const vector3& vector3, float y) const;
 
-		Vector3* getIntermediateWithZValue(Vector3& vector3, float z);
+		vector3* get_intermediate_with_z_value(const vector3& vector3, float z) const;
 
-		Vector3 getDirectionVector(double pitch, double yaw);
+		static vector3 get_direction_vector(double pitch, double yaw);
 
-		double distance(Vector3& vector3);
+		double distance(const vector3& vector3) const;
 
-		double distanceSquared(Vector3& vector3);
+		double distance_squared(const vector3& vector3) const;
 
-		double maxPlainDistance(double x, double z);
+		double max_plain_distance(double x, double z) const;
 
-		double getLength();
+		double get_length() const;
 
-		double getLengthSquared();
+		double get_length_squared() const;
 
-		double toHypot(double p1, double p2);
+		static double to_hypot(double p1, double p2);
 
-		double toDot(Vector3& vector3);
+		double to_dot(const vector3& vector3) const;
 
-		bool equals(Vector3& vector3);
+		bool equals(const vector3& vector3) const;
 	};
 
-	class Location
+	class location
 	{
-	private:
-		double _x;
-		double _y;
-		double _z;
-		double _yaw;
-		double _pitch;
-		bool _onGround;
+		double x_;
+		double y_;
+		double z_;
+		double yaw_;
+		double pitch_;
+		bool on_ground_;
 
 	public:
-		Location();
+		location();
 
-		double getX();
+		double get_x() const;
 
-		double getY();
+		void set_x(double x);
 
-		double getZ();
+		double get_y() const;
 
-		double getYaw();
+		void set_y(double y);
 
-		double getPitch();
+		double get_z() const;
 
-		bool isOnGround();
+		void set_z(double z);
+
+		double get_yaw() const;
+
+		void set_yaw(double yaw);
+
+		double get_pitch() const;
+
+		void set_pitch(double pitch);
+
+		bool is_on_ground() const;
+
+		void set_on_ground(bool on_ground);
 
 		void add(double x, double y, double z, double yaw, double pitch);
 
 		void subtract(double x, double y, double z, double yaw, double pitch);
 
-		bool equals(Location* location);
+		bool equals(const location* location) const;
 
-		std::string toString();
+		std::string to_string() const;
 	};
 }
 
